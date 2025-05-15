@@ -1,155 +1,97 @@
-<!-- @format -->
-
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Simulador de Compras</title>
-		<link rel="stylesheet" href="./ejercicio.css" />
-	</head>
-	<body>
-		<h1>Simulador de Compras 🛒</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Compras</title>
+    <link rel="stylesheet" href="./ejercicio.css">
+</head>
+<body>
 
-		<!-- Registro de Usuarios -->
-		<section>
-			<h2>Registro de Usuario</h2>
-			<form id="formRegistro">
-				<input type="text" id="nombre" placeholder="Nombre" required />
-				<input type="text" id="apellido" placeholder="Apellido" required />
-				<input type="number" id="edad" placeholder="Edad" required />
-				<button type="button" onclick="registrarUsuario()">Registrar</button>
-			</form>
-			<h3>Usuarios Registrados</h3>
-			<div id="listaUsuarios"></div>
-			<button onclick="resetearUsuarios()">Resetear Usuarios</button>
-		</section>
+    <h1>Simulador de Compras 🛒</h1>
 
-		<!-- Filtros de productos -->
-		<section>
-			<h2>Buscar Productos 🔎</h2>
-			<div id="buscarProductoContainer">
-				<input
-					type="text"
-					id="buscarProducto"
-					placeholder="Buscar por nombre..."
-					oninput="filtrarProductos(this.value)"
-				/>
-				<input type="number" id="minPrecio" placeholder="Precio mínimo" />
-				<input type="number" id="maxPrecio" placeholder="Precio máximo" />
-				<button
-					onclick="filtrarPorPrecio(document.getElementById('minPrecio').value, document.getElementById('maxPrecio').value)"
-				>
-					Filtrar por precio
-				</button>
-			</div>
-			<div id="listaFiltrada"></div>
-		</section>
+    <!-- Registro de Usuarios -->
+    <section>
+        <h2>Registro de Usuario</h2>
+        <form id="formRegistro">
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="text" id="apellido" placeholder="Apellido" required>
+            <input type="number" id="edad" placeholder="Edad" required>
+            <button type="button" onclick="registrarUsuario()">Registrar</button>
+        </form>
+        <h3>Usuarios Registrados</h3>
+        <div id="listaUsuarios"></div>
+        <button onclick="resetearUsuarios()">Resetear Usuarios</button>
+    </section>
 
-		<!-- Productos -->
-		<section id="productos">
-			<div class="categoria">
-				<h3>Cosméticos 🧴</h3>
-				<button onclick="agregarAlCarrito('Crema Facial', 10)">
-					Crema Facial - $10
-				</button>
-				<button onclick="agregarAlCarrito('Shampoo', 8)">Shampoo - $8</button>
-				<button onclick="agregarAlCarrito('Perfume', 25)">Perfume - $25</button>
-				<button onclick="agregarAlCarrito('Jabón exfoliante', 7)">
-					Jabón exfoliante - $7
-				</button>
-				<button onclick="agregarAlCarrito('Sérum hidratante', 15)">
-					Sérum hidratante - $15
-				</button>
-				<button onclick="agregarAlCarrito('Mascarilla facial', 12)">
-					Mascarilla facial - $12
-				</button>
-				<button onclick="agregarAlCarrito('Gel para el cabello', 9)">
-					Gel para el cabello - $9
-				</button>
-				<button onclick="agregarAlCarrito('Protector solar SPF 50', 18)">
-					Protector solar SPF 50 - $18
-				</button>
-			</div>
+    <!-- Filtros de productos -->
+    <section>
+        <h2>Buscar Productos 🔎</h2>
+        <div id="buscarProductoContainer">
+            <input type="text" id="buscarProducto" placeholder="Buscar por nombre..." oninput="filtrarProductos(this.value)">
+            <input type="number" id="minPrecio" placeholder="Precio mínimo">
+            <input type="number" id="maxPrecio" placeholder="Precio máximo">
+            <button onclick="filtrarPorPrecio(document.getElementById('minPrecio').value, document.getElementById('maxPrecio').value)">Filtrar por precio</button>
+        </div>
+        <div id="listaFiltrada"></div>
+    </section>
 
-			<div class="categoria">
-				<h3>Alimenticios 🍎</h3>
-				<button onclick="agregarAlCarrito('Pan', 2)">Pan - $2</button>
-				<button onclick="agregarAlCarrito('Leche', 1.5)">Leche - $1.5</button>
-				<button onclick="agregarAlCarrito('Cereal integral', 4)">
-					Cereal integral - $4
-				</button>
-				<button onclick="agregarAlCarrito('Café molido', 6)">
-					Café molido - $6
-				</button>
-				<button onclick="agregarAlCarrito('Aceite de oliva', 10)">
-					Aceite de oliva - $10
-				</button>
-				<button onclick="agregarAlCarrito('Chocolate negro', 8)">
-					Chocolate negro - $8
-				</button>
-				<button onclick="agregarAlCarrito('Frutos secos', 9)">
-					Frutos secos - $9
-				</button>
-			</div>
+    <!-- Mensaje de saldo insuficiente -->
+    <div id="mensajeSaldo"></div>
 
-			<div class="categoria">
-				<h3>Electrónica 🔌</h3>
-				<button onclick="agregarAlCarrito('Auriculares inalámbricos', 45)">
-					Auriculares inalámbricos - $45
-				</button>
-				<button onclick="agregarAlCarrito('Cargador portátil', 30)">
-					Cargador portátil - $30
-				</button>
-				<button onclick="agregarAlCarrito('Teclado mecánico', 70)">
-					Teclado mecánico - $70
-				</button>
-				<button onclick="agregarAlCarrito('Monitor de 24', 150)">
-					Monitor de 24" - $150
-				</button>
-			</div>
+    <!-- Productos -->
+    <section id="productos">
+        <div class="categoria">
+            <h3>Cosméticos 🧴</h3>
+            <button onclick="agregarAlCarrito('Crema Facial', 10)">Crema Facial - $10</button>
+            <button onclick="agregarAlCarrito('Shampoo', 8)">Shampoo - $8</button>
+            <button onclick="agregarAlCarrito('Perfume', 25)">Perfume - $25</button>
+            <button onclick="agregarAlCarrito('Jabón exfoliante', 7)">Jabón exfoliante - $7</button>
+            <button onclick="agregarAlCarrito('Protector solar SPF 50', 18)">Protector solar SPF 50 - $18</button>
+        </div>
 
-			<div class="categoria">
-				<h3>Deportes 🏋️‍♂️</h3>
-				<button onclick="agregarAlCarrito('Mancuernas ajustables', 50)">
-					Mancuernas ajustables - $50
-				</button>
-				<button onclick="agregarAlCarrito('Banda elástica', 10)">
-					Banda elástica - $10
-				</button>
-				<button onclick="agregarAlCarrito('Botella térmica', 20)">
-					Botella térmica - $20
-				</button>
-				<button onclick="agregarAlCarrito('Bicicleta estática', 200)">
-					Bicicleta estática - $200
-				</button>
-			</div>
+        <div class="categoria">
+            <h3>Alimenticios 🍎</h3>
+            <button onclick="agregarAlCarrito('Pan', 2)">Pan - $2</button>
+            <button onclick="agregarAlCarrito('Leche', 1.5)">Leche - $1.5</button>
+            <button onclick="agregarAlCarrito('Café molido', 6)">Café molido - $6</button>
+            <button onclick="agregarAlCarrito('Aceite de oliva', 10)">Aceite de oliva - $10</button>
+            <button onclick="agregarAlCarrito('Chocolate negro', 8)">Chocolate negro - $8</button>
+        </div>
 
-			<div class="categoria">
-				<h3>Hogar y decoración 🏠</h3>
-				<button onclick="agregarAlCarrito('Set de velas aromáticas', 15)">
-					Set de velas aromáticas - $15
-				</button>
-				<button onclick="agregarAlCarrito('Almohada ergonómica', 25)">
-					Almohada ergonómica - $25
-				</button>
-				<button onclick="agregarAlCarrito('Planta decorativa', 18)">
-					Planta decorativa - $18
-				</button>
-				<button onclick="agregarAlCarrito('Estantería flotante', 35)">
-					Estantería flotante - $35
-				</button>
-			</div>
-		</section>
+        <div class="categoria">
+            <h3>Electrónica 🔌</h3>
+            <button onclick="agregarAlCarrito('Auriculares inalámbricos', 45)">Auriculares inalámbricos - $45</button>
+            <button onclick="agregarAlCarrito('Cargador portátil', 30)">Cargador portátil - $30</button>
+            <button onclick="agregarAlCarrito('Teclado mecánico', 70)">Teclado mecánico - $70</button>
+            <button onclick="agregarAlCarrito('Monitor de 24', 150)">Monitor de 24" - $150</button>
+        </div>
 
-		<!-- Carrito -->
-		<section>
-			<h2>Carrito de Compras</h2>
-			<div id="listaCarrito"></div>
-			<button onclick="resetearCarrito()">Vaciar Carrito</button>
-			<button onclick="confirmarCompra()">Confirmar Compra ✅</button>
-		</section>
+        <div class="categoria">
+            <h3>Deportes 🏋️‍♂️</h3>
+            <button onclick="agregarAlCarrito('Mancuernas ajustables', 50)">Mancuernas ajustables - $50</button>
+            <button onclick="agregarAlCarrito('Banda elástica', 10)">Banda elástica - $10</button>
+            <button onclick="agregarAlCarrito('Botella térmica', 20)">Botella térmica - $20</button>
+            <button onclick="agregarAlCarrito('Bicicleta estática', 200)">Bicicleta estática - $200</button>
+        </div>
 
-		<script src="./ejercicio.js"></script>
-	</body>
+        <div class="categoria">
+            <h3>Hogar y decoración 🏠</h3>
+            <button onclick="agregarAlCarrito('Set de velas aromáticas', 15)">Set de velas aromáticas - $15</button>
+            <button onclick="agregarAlCarrito('Almohada ergonómica', 25)">Almohada ergonómica - $25</button>
+            <button onclick="agregarAlCarrito('Planta decorativa', 18)">Planta decorativa - $18</button>
+            <button onclick="agregarAlCarrito('Estantería flotante', 35)">Estantería flotante - $35</button>
+        </div>
+    </section>
+
+    <!-- Carrito -->
+    <section>
+        <h2>Carrito de Compras</h2>
+        <div id="listaCarrito"></div>
+        <button onclick="resetearCarrito()">Vaciar Carrito</button>
+        <button onclick="confirmarCompra()">Confirmar Compra ✅</button>
+    </section>
+
+    <script src="./ejercicio.js"></script>
+</body>
 </html>
