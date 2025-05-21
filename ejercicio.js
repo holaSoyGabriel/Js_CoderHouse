@@ -1,6 +1,5 @@
 /** @format */
 
-// Variables globales
 const MAX_DATOS = 5;
 let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -10,7 +9,6 @@ function generarSaldo() {
 	return Math.floor(Math.random() * (500 - 50 + 1)) + 50;
 }
 
-// Listado de productos
 const productos = {
 	cosmeticos: [
 		{ nombre: "Crema Facial", precio: 10 },
@@ -46,7 +44,6 @@ const productos = {
 	],
 };
 
-// **Registro de usuarios con saldo aleatorio**
 function registrarUsuario() {
 	if (usuarios.length >= MAX_DATOS) {
 		alert("No se pueden registrar más usuarios ⚠️");
@@ -62,6 +59,12 @@ function registrarUsuario() {
 		return;
 	}
 
+	// **VALIDAR EDAD**
+	if (edad < 18) {
+		alert("❌ No eres mayor de edad, no puedes comprar.");
+		return;
+	}
+
 	let saldo = generarSaldo(); // Asignar saldo aleatorio
 
 	let nuevoUsuario = { nombre, apellido, edad, saldo };
@@ -70,9 +73,13 @@ function registrarUsuario() {
 
 	alert(`Usuario registrado correctamente ✅ Saldo asignado: $${saldo}`);
 	mostrarUsuarios();
+
+	// **LIMPIAR CAMPOS DEL FORMULARIO**
+	document.getElementById("nombre").value = "";
+	document.getElementById("apellido").value = "";
+	document.getElementById("edad").value = "";
 }
 
-// **Mostrar usuarios con saldo**
 function mostrarUsuarios() {
 	let contenedor = document.getElementById("listaUsuarios");
 	contenedor.innerHTML =
@@ -87,7 +94,6 @@ function mostrarUsuarios() {
 	});
 }
 
-// **Agregar productos al carrito**
 function agregarAlCarrito(nombre, precio) {
 	carrito.push({ nombre, precio });
 	localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -95,7 +101,6 @@ function agregarAlCarrito(nombre, precio) {
 	mostrarCarrito();
 }
 
-// **Mostrar carrito**
 function mostrarCarrito() {
 	let contenedor = document.getElementById("listaCarrito");
 	contenedor.innerHTML =
@@ -113,7 +118,6 @@ function mostrarCarrito() {
 	verificarSaldo();
 }
 
-// **Eliminar producto específico del carrito**
 function eliminarProducto(nombre) {
 	carrito = carrito.filter((producto) => producto.nombre !== nombre);
 	localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -121,7 +125,6 @@ function eliminarProducto(nombre) {
 	verificarSaldo();
 }
 
-// **Resetear datos**
 function resetearUsuarios() {
 	usuarios = [];
 	localStorage.removeItem("usuarios");
@@ -163,7 +166,6 @@ function mostrarListaFiltrada(lista) {
 	});
 }
 
-// **Confirmación de compra con verificación de saldo**
 function confirmarCompra() {
 	if (carrito.length === 0) {
 		alert("El carrito está vacío, agrega productos antes de comprar. 🛒");
@@ -188,7 +190,6 @@ function confirmarCompra() {
 	alert("✅ Compra realizada con éxito!");
 }
 
-// **Verificar saldo y mostrar mensaje en el DOM**
 function verificarSaldo() {
 	let usuario = usuarios[usuarios.length - 1];
 	let total = carrito.reduce((suma, producto) => suma + producto.precio, 0);

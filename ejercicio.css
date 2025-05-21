@@ -1,5 +1,4 @@
 /**
- * Estilos generales
  *
  * @format
  */
@@ -12,7 +11,6 @@ body {
 	text-align: center;
 }
 
-/* Secciones */
 section {
 	background: white;
 	padding: 20px;
@@ -22,7 +20,6 @@ section {
 	max-width: 600px;
 }
 
-/* Botones */
 button {
 	background-color: #007bff;
 	color: white;
@@ -40,7 +37,6 @@ button:hover {
 	background-color: #0056b3;
 }
 
-/* Secciones de registro y búsqueda con Flexbox */
 #formRegistro,
 #buscarProductoContainer {
 	display: flex;
@@ -49,7 +45,6 @@ button:hover {
 	gap: 10px;
 }
 
-/* Campos de entrada organizados */
 input {
 	width: 80%;
 	padding: 8px;
@@ -58,21 +53,54 @@ input {
 	border-radius: 5px;
 }
 
-/* Botón de registro y filtros alineados */
-#formRegistro button,
-#buscarProductoContainer button {
+#formRegistro button {
 	width: 50%;
 	align-self: center;
 }
 
-/* Contenedor de productos con Grid */
+#listaUsuarios {
+	background-color: #eef2f3;
+	padding: 15px;
+	margin-top: 30px;
+	border-radius: 8px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+	text-align: left;
+	border-top: 5px solid #007bff;
+}
+
+#listaUsuarios p {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	font-weight: bold;
+}
+
+h3 {
+	font-size: 20px;
+	color: #007bff;
+	margin-bottom: 15px;
+	text-align: center;
+	border-bottom: 3px solid #ddd;
+	padding-bottom: 5px;
+}
+
+button#resetUsuarios {
+	width: 50%;
+	font-size: 14px;
+	padding: 8px;
+	background-color: #dc3545;
+	margin-top: 15px;
+}
+
+button#resetUsuarios:hover {
+	background-color: #b22234;
+}
+
 #productos {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-/* Categorías de productos */
 .categoria {
 	padding: 15px;
 	border-radius: 8px;
@@ -81,7 +109,6 @@ input {
 	border-left: 5px solid #007bff;
 }
 
-/* Títulos de categorías */
 .categoria h3 {
 	color: #007bff;
 	margin-bottom: 10px;
@@ -90,7 +117,6 @@ input {
 	padding-bottom: 5px;
 }
 
-/* Botones dentro de cada categoría */
 .categoria button {
 	width: 100%;
 	padding: 10px;
